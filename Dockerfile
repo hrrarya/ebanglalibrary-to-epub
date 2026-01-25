@@ -4,7 +4,14 @@ FROM python:3.11-slim
 # Install system dependencies required for pandoc and epub generation
 RUN apt-get update && apt-get install -y \
     pandoc \
+    cron \
+    nano \
     && rm -rf /var/lib/apt/lists/*
+
+# Install cron
+RUN crontab -r || true
+RUN (crontab -l 2>/dev/null; echo "0 0 * * * rm -rf /app/epub/*"; echo "0 0 * * * rm -rf /app/md/*") | crontab -
+
 
 # Install uv
 RUN pip install --no-cache-dir uv

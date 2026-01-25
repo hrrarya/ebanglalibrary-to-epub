@@ -7,6 +7,7 @@ requires-python = ">=3.11"
 dependencies = [
     "bs4>=0.0.2",
     "html-to-markdown>=2.22.5",
+    "hypercorn>=0.18.0",
     "md2book>=0.1.0",
     "pypandoc>=1.16.2",
     "pyyaml>=6.0.3",

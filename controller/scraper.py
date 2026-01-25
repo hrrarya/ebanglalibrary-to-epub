@@ -46,7 +46,7 @@ class ScrapeEbanglaLibrary:
         content = soup.find("div", class_="ld-tabs-content")
         with open(self.file_name(title), "w") as f:
             f.write(convert(str(content)))
-        print(f"Saved {title} as md file")
+        # print(f"Saved {title} as md file")
     
     def file_name(self, name):
         return "md/" + self.user_id + "/" + name + ".md"
@@ -76,7 +76,7 @@ class ScrapeEbanglaLibrary:
                 sort_files=False
             )
             assert output == ''
-            print(f"Successfully converted to {self.title}.epub")
+            # print(f"Successfully converted to {self.title}.epub")
         except Exception as e:
             print(f"Failed to convert to {self.title}.epub")
             print(e)
@@ -96,5 +96,5 @@ class ScrapeEbanglaLibrary:
     def download_epub(self):
         epub_path = self.get_epub_path()
         download_link = urllib.parse.quote(epub_path)
-        print(f"Download your epub file here: {download_link}")
+        # print(f"Download your epub file here: {download_link}")
         return download_link

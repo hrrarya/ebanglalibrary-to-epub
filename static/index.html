@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eBangla Library Scraper</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>eBangla Library Scraper</h1>
+            <p>Convert eBangla lessons to EPUB books</p>
+        </header>
+
+        <main>
+            <div class="card">
+                <form id="scrape-form">
+                    <div class="input-group">
+                        <label for="url">Lesson URL</label>
+                        <input 
+                            type="text" 
+                            id="url" 
+                            name="url" 
+                            placeholder="https://www.ebanglalibrary.com/lessons/lesson-name" 
+                            required
+                        >
+                        <small id="error-message" class="error-hidden">Invalid URL pattern. Please follow the placeholder pattern.</small>
+                    </div>
+                    <button type="submit" id="submit-btn">Get Download Link</button>
+                </form>
+
+                <div id="loading" class="hidden">
+                    <div class="spinner"></div>
+                    <p>Scraping and converting... This may take a moment.</p>
+                </div>
+
+                <div id="result" class="hidden">
+                    <div class="success-icon">✓</div>
+                    <h2 id="book-title">Book Name</h2>
+                    <a id="download-btn" href="#" class="btn-download" download>Download EPUB</a>
+                    <p class="expiry-note">This link is valid till today 12.00Am.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>

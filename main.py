@@ -1,4 +1,7 @@
+import os
 # from controller import ScrapeEbanglaLibrary
+
+# FRONTEND_FILE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "frontend")
 
 if __name__ == "__main__":
     pass

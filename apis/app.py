@@ -1,13 +1,26 @@
-from quart import Quart, request, jsonify, send_file
+from quart import Quart, request, jsonify, send_file, send_from_directory
 import os
 import sys
+from pathlib import Path
 
-# Add parent directory to path to import controller
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from controller import ScrapeEbanglaLibrary
 
-app = Quart(__name__)
+# Define paths
+BASE_DIR = Path(__file__).parent.parent
+STATIC_DIR = BASE_DIR / 'static'
+
+app = Quart(__name__, static_folder=str(STATIC_DIR))
+
+# Serve frontend static files
+@app.route('/')
+async def serve_frontend():
+    return await send_from_directory(str(STATIC_DIR), 'index.html')
+
+@app.route('/<path:path>')
+async def static_files(path):
+    return await send_from_directory(str(STATIC_DIR), path)
 
 
 @app.route('/get-download-link', methods=['POST'])

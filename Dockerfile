@@ -31,7 +31,7 @@ COPY . .
 RUN mkdir -p epub md
 
 # Expose port (matching the app.py port)
-EXPOSE 23223
+EXPOSE 8000
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1

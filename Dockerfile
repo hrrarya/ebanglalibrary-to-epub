@@ -31,10 +31,10 @@ COPY . .
 RUN mkdir -p epub md
 
 # Expose port (matching the app.py port)
-EXPOSE 23223
+EXPOSE 8000
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
 
 # Run app using hypercorn for production
-CMD ["uv", "run", "hypercorn", "apis.app:app", "--bind", "0.0.0.0:23223"]
+CMD ["uv", "run", "hypercorn", "apis.app:app", "--bind", "0.0.0.0:8000"]

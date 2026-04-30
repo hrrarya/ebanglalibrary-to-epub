@@ -7,6 +7,7 @@ import os
 import shutil
 import urllib.parse
 from pypandoc.pandoc_download import download_pandoc
+from pathlib import Path
 
 # download_pandoc()
 
@@ -63,16 +64,35 @@ class ScrapeEbanglaLibrary:
         
         input_files = list(map(self.file_name, self.pdf_urls.keys()))
 
+        extra_args = [
+            "--from", "markdown+smart",
+            "--to", "epub3",
+
+            "--metadata", f"title={self.title}",
+            "--metadata", "language=bn",
+            "--metadata", f"creator={self.author}",
+
+            "--toc",
+            "--toc-depth=2",
+            "--split-level=1",
+
+            "--epub-subdirectory=EPUB",
+            "--standalone",
+
+            # Safer for Kindle
+            "--wrap=none",
+            "--markdown-headings=atx",
+        ]
+        cover = Path("cover.png")
+        if cover.exists():
+            extra_args.append(f"--epub-cover-image={cover}")
+            
         try:
             output = pypandoc.convert_file(
                 input_files,
-                to='epub',
+                to='epub3',
                 outputfile=f"epub/{self.user_id}/{self.title}.epub",
-                extra_args=[
-                    '--metadata', f'title={self.title}', 
-                    '--metadata', f'author={self.author}', 
-                    '--toc'
-                ],
+                extra_args=extra_args,
                 sort_files=False
             )
             assert output == ''

@@ -14,7 +14,7 @@ def fetch_html(url):
         f.write(str(soup))
     print(f"Saved {url}")
 
-url = 'https://www.ebanglalibrary.com/lessons/%e0%a6%85%e0%a7%8d%e0%a6%af%e0%a6%be-%e0%a6%95%e0%a6%bf%e0%a6%a1%e0%a6%a8%e0%a7%8d%e0%a6%af%e0%a6%be%e0%a6%aa%e0%a6%bf%e0%a6%82-%e0%a7%a7/'
+url = 'https://www.ebanglalibrary.com/lessons/%e0%a6%a6%e0%a7%8d%e0%a6%af-%e0%a6%a1%e0%a6%bf%e0%a6%ad%e0%a7%8b%e0%a6%b6%e0%a6%a8-%e0%a6%85%e0%a6%ac-%e0%a6%b8%e0%a6%be%e0%a6%b8%e0%a6%aa%e0%a7%87%e0%a6%95%e0%a7%8d%e0%a6%9f-%e0%a6%8f%e0%a6%95/'
 # fetch_html(url)
 
 def fetch_pdf_urls():
@@ -51,9 +51,29 @@ def file_name(name):
 
 def md_to_epub():
     input_files = list( map( file_name, pdf_urls.keys() ) )
+    extra_args = [
+        "--from", "markdown+smart",
+        "--to", "epub3",
+
+        "--metadata", f"title={title}",
+        "--metadata", "language=bn",
+        "--metadata", "creator=Unknown",
+
+        "--toc",
+        "--toc-depth=2",
+        "--split-level=1",
+
+        "--epub-subdirectory=EPUB",
+        "--standalone",
+
+        # Safer for Kindle
+        "--wrap=none",
+        "--markdown-headings=atx",
+    ]
+
     output = pypandoc.convert_file(
         input_files,
-        to='epub',
+        to='epub3',
         outputfile="অ্যা কিডন্যাপিং.epub",
         extra_args=['--metadata', 'title="অ্যা কিডন্যাপিং"', '--toc'], # Example of adding metadata and TOC,
         sort_files=False

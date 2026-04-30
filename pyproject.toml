@@ -9,6 +9,7 @@ dependencies = [
     "html-to-markdown>=2.22.5",
     "hypercorn>=0.18.0",
     "md2book>=0.1.0",
+    "pathlib>=1.0.1",
     "pypandoc>=1.16.2",
     "pyyaml>=6.0.3",
     "quart>=0.20.0",
